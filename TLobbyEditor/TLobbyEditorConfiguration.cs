@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Rocket.API;
-using TPlugins.TLobbyEditor.Compability;
+﻿using Tavstal.TLibrary.Compatibility;
+using Tavstal.TLobbyEditor.Models;
 
-namespace TPlugins.TLobbyEditor 
+namespace Tavstal.TLobbyEditor
 {
-    public class TLobbyEditorConfiguration : IRocketPluginConfiguration
+    public class TLobbyEditorConfiguration : ConfigurationBase
     {
         public bool ShouldAdversiteServer { get; set; }
         public bool HideRocket { get; set; }
@@ -33,7 +29,7 @@ namespace TPlugins.TLobbyEditor
         public string[] DescriptionFull { get; set; }
         public ReservedSlots reservedSlots { get; set; }
 
-        public void LoadDefaults()
+        public override void LoadDefaults()
         {
             ShouldAdversiteServer = true;
             HideRocket = true;

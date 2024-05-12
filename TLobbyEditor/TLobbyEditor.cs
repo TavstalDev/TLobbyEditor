@@ -1,88 +1,50 @@
-﻿#region References
-using System;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using Rocket.API;
 using Rocket.Core;
-using Rocket.Core.Plugins;
-using SDG.Unturned;
-using SDG.Framework.Modules;
-using Steamworks;
-using Rocket.Unturned;
 using Rocket.Unturned.Permissions;
 using Rocket.Unturned.Player;
-using UnityEngine;
-using Logger = TPlugins.TLobbyEditor.Logger;
+using SDG.Unturned;
+using Steamworks;
+using System;
 using System.Globalization;
-using Rocket.API;
-using Rocket.API.Collections;
-using Rocket.Unturned.Chat;
-using Rocket.Core.Permissions;
-using Rocket.API.Serialisation;
-using Rocket.Core.Commands;
-using System.Text.RegularExpressions;
-using Rocket.Unturned.Events;
-using System.IO;
-using UnityEngine.Networking;
-using System.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-using SDG.Provider.Services.Matchmaking;
-using SDG.SteamworksProvider;
-using TPlugins.TLobbyEditor.Compability;
-#endregion
+using System.Linq;
+using System.Threading;
+using Tavstal.TLibrary.Compatibility;
+using Tavstal.TLobbyEditor.Models;
 
-namespace TPlugins.TLobbyEditor
+namespace Tavstal.TLobbyEditor
 {
-    public class TLobbyEditor : RocketPlugin<TLobbyEditorConfiguration>
+    public class TLobbyEditor : PluginBase<TLobbyEditorConfiguration>
     {
-        public const string PluginName = "TLobbyEditor";
-        public const string PluginAuthor = "Tavstal";
-        public const string PluginCompany = "TPlugins";
-        public const string PluginCopyright = "Copyright © TPlugins 2022";
-        public const string PluginDescription = "This plugin has been made for the Unturfield server network.";
-        public const string Version = "1.0.0.0";
+        public new static TLobbyEditor Instance { get; private set; }
 
-        public static TLobbyEditor Instance { get; set; }
-        public static TLobbyEditorConfiguration Config { get; set; }
-
-        protected override void Load()
+        public override void OnLoad()
         {
-            Instance = this;
-            Config = Configuration.Instance;
-
-            U.Events.OnPlayerConnected += Event_OnPlayerConnected;
-            U.Events.OnPlayerDisconnected += Event_OnPlayerDisconnected;
-            LateInit(1);
-            //UnturnedPermissions.OnJoinRequested += Event_OnPlayerConnectPending;
-
             Level.onPostLevelLoaded += LateInit;
             if (Level.isLoaded)
                 StartModifyingLobbyInfo();
 
-            Logger.Log("##################################################");
-            Logger.Log("#            Thanks for using my plugin          #");
-            Logger.Log("#            Plugin Created By Tavstal           #");
-            Logger.Log("#              Discord: Tavstal#6189             #");
-            Logger.Log("#      Website: https://redstoneplugins.com      #");
-            Logger.Log("#                Version: " + Version + "                #");
-            Logger.Log("##################################################");
-            Logger.Log("");
-            Logger.Log("TLobbyEdtior has been successfully loaded");
+            Logger.LogWarning("████████╗██╗      ██████╗ ██████╗ ██████╗ ██╗   ██╗");
+            Logger.LogWarning("╚══██╔══╝██║     ██╔═══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝");
+            Logger.LogWarning("   ██║   ██║     ██║   ██║██████╔╝██████╔╝ ╚████╔╝ ");
+            Logger.LogWarning("   ██║   ██║     ██║   ██║██╔══██╗██╔══██╗  ╚██╔╝  ");
+            Logger.LogWarning("   ██║   ███████╗╚██████╔╝██████╔╝██████╔╝   ██║   ");
+            Logger.LogWarning("   ╚═╝   ╚══════╝ ╚═════╝ ╚═════╝ ╚═════╝    ╚═╝   ");
+            Logger.Log("#########################################");
+            Logger.Log("# Thanks for using my plugin");
+            Logger.Log("# Plugin Created By Tavstal");
+            Logger.Log("# Discord: Tavstal#6189");
+            Logger.Log("# Website: https://redstoneplugins.com");
+            Logger.Log("# Discord: https://discord.gg/redstoneplugins");
+            Logger.Log("#########################################");
+            Logger.Log(string.Format("# Build Version: {0}", Version));
+            Logger.Log(string.Format("# Build Date: {0}", BuildDate));
+            Logger.Log("#########################################");
         }
 
-        protected override void Unload()
+        public override void OnUnLoad()
         {
-            U.Events.OnPlayerConnected -= Event_OnPlayerConnected;
-            U.Events.OnPlayerDisconnected -= Event_OnPlayerDisconnected;
             UnturnedPermissions.OnJoinRequested -= Event_OnPlayerConnectPending;
-
-            //Level.onPostLevelLoaded -= LateInit;
+            Level.onPostLevelLoaded -= LateInit;
 
             Logger.Log("TLobbyEdtior has been successfully unloaded");
         }
@@ -95,7 +57,7 @@ namespace TPlugins.TLobbyEditor
         {
             try
             {
-                StartCoroutine(DelayedInvoke(1f, () => 
+                InvokeAction(1f, () => 
                 {
                     if (Config.HideRocket)
                         SteamGameServer.SetBotPlayerCount(0);
@@ -117,7 +79,7 @@ namespace TPlugins.TLobbyEditor
                         }
                     }
                     else
-                        SteamGameServer.SetKeyValue("Cfg_Count", Helpers.GetConfigurationCount().ToString());
+                        SteamGameServer.SetKeyValue("Cfg_Count", LobbyHelpers.GetConfigurationCount().ToString());
                     #endregion
                     #region Workshop
                     if (Config.HideWorkshop)
@@ -133,7 +95,7 @@ namespace TPlugins.TLobbyEditor
                         }
                     }
                     else
-                        SteamGameServer.SetKeyValue("Mod_Count", Helpers.GetWorkshopCount().ToString());
+                        SteamGameServer.SetKeyValue("Mod_Count", LobbyHelpers.GetWorkshopCount().ToString());
                     #endregion
                     #region Plugins 
                     if (Config.HidePlugins)
@@ -244,29 +206,13 @@ namespace TPlugins.TLobbyEditor
 
                     
                     #endregion
-                }));
+                });
                 
             }
             catch (Exception ex)
             {
                 Logger.LogError("Error in Modify: " + ex);
             }
-        }
-
-        public static IEnumerator DelayedInvoke(float time, System.Action action)
-        {
-            yield return new WaitForSeconds(time);
-            action();
-        }
-
-        private void Event_OnPlayerConnected(UnturnedPlayer player)
-        {
-           
-        }
-
-        private void Event_OnPlayerDisconnected(UnturnedPlayer player)
-        { 
-
         }
 
         private void Event_OnPlayerConnectPending(CSteamID steamid, ref ESteamRejection? rejectionReason)

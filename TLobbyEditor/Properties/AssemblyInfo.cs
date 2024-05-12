@@ -1,18 +1,17 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle(TPlugins.TLobbyEditor.TLobbyEditor.PluginName)]
-[assembly: AssemblyDescription(TPlugins.TLobbyEditor.TLobbyEditor.PluginDescription)]
+[assembly: AssemblyTitle("TLobbyEditor")]
+[assembly: AssemblyDescription("Unturned 3.x plugin that modifies the server's lobby details.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany(TPlugins.TLobbyEditor.TLobbyEditor.PluginCompany)]
-[assembly: AssemblyProduct(TPlugins.TLobbyEditor.TLobbyEditor.PluginName)]
-[assembly: AssemblyCopyright(TPlugins.TLobbyEditor.TLobbyEditor.PluginCopyright)]
+[assembly: AssemblyCompany("Tavstal")]
+[assembly: AssemblyProduct("TLobbyEditor")]
+[assembly: AssemblyCopyright("Copyright ©  2024 Tavstal")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("en-GB")]
+[assembly: AssemblyCulture("en")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -32,5 +31,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion(TPlugins.TLobbyEditor.TLobbyEditor.Version)]
-[assembly: AssemblyFileVersion(TPlugins.TLobbyEditor.TLobbyEditor.Version)]
+[assembly: AssemblyVersion("1.0.*")]
