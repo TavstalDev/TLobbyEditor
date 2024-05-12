@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D31EC675-6992-4E95-ACF5-291B6679A847}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TPlugins.TLobbyEditor</RootNamespace>
+    <AssemblyName>TLobbyEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\Libraries\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="com.rlabrecque.steamworks.net">
+      <HintPath>..\..\..\Libraries\com.rlabrecque.steamworks.net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-BouncyCastle.Crypto">
+      <HintPath>..\..\..\Libraries\RL-BouncyCastle.Crypto.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-Google.Protobuf">
+      <HintPath>..\..\..\Libraries\RL-Google.Protobuf.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-Newtonsoft.Json">
+      <HintPath>..\..\..\Libraries\RL-Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-Renci.SshNet">
+      <HintPath>..\..\..\Libraries\RL-Renci.SshNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-RestSharp">
+      <HintPath>..\..\..\Libraries\RL-RestSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-System.Data">
+      <HintPath>..\..\..\Libraries\RL-System.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-System.Data.DataSetExtensions">
+      <HintPath>..\..\..\Libraries\RL-System.Data.DataSetExtensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-System.Management">
+      <HintPath>..\..\..\Libraries\RL-System.Management.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-System.Net.Http">
+      <HintPath>..\..\..\Libraries\RL-System.Net.Http.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-System.Transactions">
+      <HintPath>..\..\..\Libraries\RL-System.Transactions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-System.Web">
+      <HintPath>..\..\..\Libraries\RL-System.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-System.Xml">
+      <HintPath>..\..\..\Libraries\RL-System.Xml.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RL-System.Xml.Linq">
+      <HintPath>..\..\..\Libraries\RL-System.Xml.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Rocket.API">
+      <HintPath>..\..\..\Libraries\Rocket.API.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Rocket.Core">
+      <HintPath>..\..\..\Libraries\Rocket.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Rocket.Unturned">
+      <HintPath>..\..\..\Libraries\Rocket.Unturned.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SDG.NetTransport">
+      <HintPath>..\..\..\Libraries\SDG.NetTransport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\Libraries\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\Libraries\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\..\Libraries\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Compability\Extensions.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="TLobbyEditor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TLobbyEditorConfiguration.cs" />
+    <Compile Include="Compability\Variables.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
