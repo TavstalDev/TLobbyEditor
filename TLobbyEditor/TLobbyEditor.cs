@@ -61,8 +61,8 @@ namespace Tavstal.TLobbyEditor
                 {
                     if (Config.HideRocket)
                         SteamGameServer.SetBotPlayerCount(0);
-                    if (Config.reservedSlots.Enable)
-                        SteamGameServer.SetMaxPlayerCount(Config.reservedSlots.DefaultSlots + Config.reservedSlots.MaxReservedSlots);
+                    if (Config.ReservedSlots.Enable)
+                        SteamGameServer.SetMaxPlayerCount(Config.ReservedSlots.DefaultSlots + Config.ReservedSlots.MaxReservedSlots);
                     SteamGameServer.SetAdvertiseServerActive(Config.ShouldAdversiteServer);
 
                     #region Config
@@ -220,12 +220,12 @@ namespace Tavstal.TLobbyEditor
             SteamPending pending = Provider.pending.Find(x => x.playerID.steamID == steamid);
             UnturnedPlayer player = UnturnedPlayer.FromCSteamID(steamid);
 
-            if (Config.reservedSlots.Enable)
+            if (Config.ReservedSlots.Enable)
             {
-                if (Provider.clients.Count < Config.reservedSlots.DefaultSlots)
+                if (Provider.clients.Count < Config.ReservedSlots.DefaultSlots)
                     return;
 
-                if (Config.reservedSlots.RequirePermission && !player.HasPermission(Config.reservedSlots.Permission))
+                if (Config.ReservedSlots.RequirePermission && !player.HasPermission(Config.ReservedSlots.Permission))
                     rejectionReason = ESteamRejection.SERVER_FULL;
             }
         }

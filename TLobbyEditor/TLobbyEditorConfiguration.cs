@@ -27,7 +27,7 @@ namespace Tavstal.TLobbyEditor
         public string Description { get; set; }
         public string DescriptionHint { get; set; }
         public string[] DescriptionFull { get; set; }
-        public ReservedSlots reservedSlots { get; set; }
+        public ReservedSlots ReservedSlots { get; set; }
 
         public override void LoadDefaults()
         {
@@ -56,7 +56,7 @@ namespace Tavstal.TLobbyEditor
                 "<color=orange>Features</color>", "<color=green>+</color> <color=white>Conquest gamemode</color>", "<color=green>+</color> <color=white>0/24 online</color>", "<color=green>+</color> <color=white>Objectives</color>",
                 "<color=green>+</color> <color=white>Teams</color>", "<color=green>+</color> <color=white>Loadouts</color>", "<color=green>+</color> <color=white>Revive System</color>", "<color=green>+</color> <color=white>Custom HUD</color>",
                 "<color=green>+</color> <color=white>Much more!</color>"};
-            reservedSlots = new ReservedSlots
+            ReservedSlots = new ReservedSlots
             {
                 Enable = true,
                 RequirePermission = true,
