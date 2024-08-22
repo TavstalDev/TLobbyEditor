@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Tavstal.TLobbyEditor
+namespace Tavstal.TLobbyEditor.Helpers
 {
     public static class LobbyHelpers 
     {

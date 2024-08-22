@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Tavstal.TLibrary.Compatibility;
+using Tavstal.TLibrary.Models.Plugin;
 using Tavstal.TLobbyEditor.Models;
 
 namespace Tavstal.TLobbyEditor
@@ -53,19 +53,19 @@ namespace Tavstal.TLobbyEditor
         [JsonProperty(Order = 25)]
         public ReservedSlots ReservedSlots { get; set; }
 
-        public override void LoadDefaults()
+        public new void LoadDefaults()
         {
             ShouldAdversiteServer = true;
             HideRocket = true;
             HideWorkshop = false;
             MessWorkshop = true;
-            Workshop = new string[] { "2563994234" };
+            Workshop = new[] { "2563994234" };
             HideConfig = false;
             MessConfig = true;
-            Config = new string[] { "Server.maintenance=false", "Server.version=1.0.0", "Server.scorebombactive=false", "Server.alphaonly=false", "Server.betaonly=false" };
+            Config = new[] { "Server.maintenance=false", "Server.version=1.0.0", "Server.scorebombactive=false", "Server.alphaonly=false", "Server.betaonly=false" };
             HidePlugins = false;
             MessPlugins = true;
-            Plugins = new string[] { "Server configured by", "TLobbyEditor" };
+            Plugins = new[] { "Server configured by", "TLobbyEditor" };
             MessGamemode = true;
             Gamemode = "Conquest";
             IsPVP = true;
@@ -76,7 +76,7 @@ namespace Tavstal.TLobbyEditor
             HasBattleye = true;
             Description = "<color=yellow>Fight just like soldiers</color>";
             DescriptionHint = "<color=yellow>Hosted by: unknown.com</color>";
-            DescriptionFull = new string[] { "<color=#00FFFF>Welcome to Unturfield! Our server is heavily modified by plugins and mods with custom gamemode.</color> \n",
+            DescriptionFull = new[] { "<color=#00FFFF>Welcome to Unturfield! Our server is heavily modified by plugins and mods with custom gamemode.</color> \n",
                 "<color=orange>Features</color>", "<color=green>+</color> <color=white>Conquest gamemode</color>", "<color=green>+</color> <color=white>0/24 online</color>", "<color=green>+</color> <color=white>Objectives</color>",
                 "<color=green>+</color> <color=white>Teams</color>", "<color=green>+</color> <color=white>Loadouts</color>", "<color=green>+</color> <color=white>Revive System</color>", "<color=green>+</color> <color=white>Custom HUD</color>",
                 "<color=green>+</color> <color=white>Much more!</color>"};

@@ -8,8 +8,9 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using Tavstal.TLibrary.Compatibility;
+using Tavstal.TLibrary.Models.Plugin;
 using Tavstal.TLobbyEditor.Models;
+using Tavstal.TLobbyEditor.Helpers;
 
 namespace Tavstal.TLobbyEditor
 {
@@ -19,6 +20,7 @@ namespace Tavstal.TLobbyEditor
 
         public override void OnLoad()
         {
+            Instance = this;
             Level.onPostLevelLoaded += LateInit;
             if (Level.isLoaded)
                 StartModifyingLobbyInfo();
@@ -36,8 +38,8 @@ namespace Tavstal.TLobbyEditor
             Logger.Log("# Website: https://redstoneplugins.com");
             Logger.Log("# Discord: https://discord.gg/redstoneplugins");
             Logger.Log("#########################################");
-            Logger.Log(string.Format("# Build Version: {0}", Version));
-            Logger.Log(string.Format("# Build Date: {0}", BuildDate));
+            Logger.Log($"# Build Version: {Version}");
+            Logger.Log($"# Build Date: {BuildDate}");
             Logger.Log("#########################################");
         }
 
@@ -110,7 +112,8 @@ namespace Tavstal.TLobbyEditor
 
                     #region Tags
                     #region Difficulty
-                    string difficulty = "NRM";
+
+                    string difficulty;
 
                     string configDifficulty = Config.Difficulty.ToUpperInvariant();
                     switch (configDifficulty)
@@ -134,7 +137,8 @@ namespace Tavstal.TLobbyEditor
                     #endregion
 
                     #region CameraMode
-                    string cameraMode = "2Pp";
+
+                    string cameraMode;
                     string configCameraMode = Config.CameraMode.ToUpperInvariant();
                     switch (configCameraMode.ToUpper())
                     {
