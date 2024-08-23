@@ -53,7 +53,7 @@ namespace Tavstal.TLobbyEditor
         [JsonProperty(Order = 25)]
         public ReservedSlots ReservedSlots { get; set; }
 
-        public new void LoadDefaults()
+        public override void LoadDefaults()
         {
             ShouldAdversiteServer = true;
             HideRocket = true;
