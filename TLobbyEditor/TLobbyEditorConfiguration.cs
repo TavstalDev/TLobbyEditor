@@ -55,6 +55,9 @@ namespace Tavstal.TLobbyEditor
 
         public override void LoadDefaults()
         {
+            DebugMode = false;
+            Locale = "en";
+            DownloadLocalePacks = true;
             ShouldAdversiteServer = true;
             HideRocket = true;
             HideWorkshop = false;
