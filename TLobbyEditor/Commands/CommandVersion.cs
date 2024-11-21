@@ -17,10 +17,10 @@ namespace Tavstal.TLobbyEditor.Commands
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
-            UChatHelper.SendPlainCommandReply(TLobbyEditor.Instance, caller, "#########################################");
-            UChatHelper.SendPlainCommandReply(TLobbyEditor.Instance, caller, $"# Build Version: {TLobbyEditor.Version}");
-            UChatHelper.SendPlainCommandReply(TLobbyEditor.Instance, caller, $"# Build Date: {TLobbyEditor.BuildDate}");
-            UChatHelper.SendPlainCommandReply(TLobbyEditor.Instance, caller, "#########################################");
+            TLobbyEditor.Instance.SendPlainCommandReply(caller, "#########################################");
+            TLobbyEditor.Instance.SendPlainCommandReply(caller, $"# Build Version: {TLobbyEditor.Version}");
+            TLobbyEditor.Instance.SendPlainCommandReply(caller, $"# Build Date: {TLobbyEditor.BuildDate}");
+            TLobbyEditor.Instance.SendPlainCommandReply(caller, "#########################################");
         }
     }
 }
