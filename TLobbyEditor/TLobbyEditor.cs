@@ -51,7 +51,7 @@ namespace Tavstal.TLobbyEditor
             Logger.Log("TLobbyEdtior has been successfully unloaded");
         }
 
-        protected void LateInit(int level) => StartModifyingLobbyInfo();
+        private void LateInit(int level) => StartModifyingLobbyInfo();
 
         private void StartModifyingLobbyInfo() => new Thread(Modify).Start();
 
