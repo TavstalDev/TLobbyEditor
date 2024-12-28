@@ -12,5 +12,14 @@ namespace Tavstal.TLobbyEditor.Models
         public int MaxReservedSlots { get; set; }
 
         public ReservedSlots() { }
+
+        public ReservedSlots(bool enable, bool requirePermission, string permission, int defaultSlots, int maxReservedSlots)
+        {
+            Enable = enable;
+            RequirePermission = requirePermission;
+            Permission = permission;
+            DefaultSlots = defaultSlots;
+            MaxReservedSlots = maxReservedSlots;
+        }
     }
 }

@@ -14,10 +14,23 @@ using Tavstal.TLobbyEditor.Helpers;
 
 namespace Tavstal.TLobbyEditor
 {
+    /// <summary>
+    /// Represents a plugin for the lobby editor, inheriting from <see cref="PluginBase{TLobbyEditorConfiguration}"/>.
+    /// </summary>
+    /// <remarks>
+    /// This class serves as the entry point for the lobby editor plugin and provides the functionality to configure and manage the lobby editor settings.
+    /// </remarks>
+    // ReSharper disable once InconsistentNaming
     public class TLobbyEditor : PluginBase<TLobbyEditorConfiguration>
     {
-        public new static TLobbyEditor Instance { get; private set; }
+        public static TLobbyEditor Instance { get; private set; }
 
+        /// <summary>
+        /// Called when the plugin is loaded. Initializes the necessary resources and configurations for the plugin.
+        /// </summary>
+        /// <remarks>
+        /// Override this method to implement the logic required during the loading of the plugin, such as setting up event handlers or loading configuration files.
+        /// </remarks>
         public override void OnLoad()
         {
             Instance = this;
@@ -43,18 +56,43 @@ namespace Tavstal.TLobbyEditor
             Logger.Log("#########################################");
         }
 
+        /// <summary>
+        /// Called when the plugin is unloaded. Cleans up resources and event handlers used by the plugin.
+        /// </summary>
+        /// <remarks>
+        /// Override this method to implement the logic required for cleanup, such as unsubscribing from events or releasing resources.
+        /// </remarks>
         public override void OnUnLoad()
         {
-            UnturnedPermissions.OnJoinRequested -= Event_OnPlayerConnectPending;
+            UnturnedPermissions.OnJoinRequested -= OnPlayerConnectPending;
             Level.onPostLevelLoaded -= LateInit;
 
             Logger.Log("TLobbyEdtior has been successfully unloaded");
         }
 
+        /// <summary>
+        /// Initializes the lobby modification process after the level is loaded.
+        /// </summary>
+        /// <param name="level">The level index or identifier that indicates when to start the modification process.</param>
+        /// <remarks>
+        /// This method is typically called after the level is initialized to begin the process of modifying lobby information.
+        /// </remarks>
         private void LateInit(int level) => StartModifyingLobbyInfo();
 
+        /// <summary>
+        /// Starts a new thread to modify the lobby information.
+        /// </summary>
+        /// <remarks>
+        /// This method initiates a separate thread to run the <see cref="Modify"/> method, allowing the modification process to occur asynchronously.
+        /// </remarks>
         private void StartModifyingLobbyInfo() => new Thread(Modify).Start();
 
+        /// <summary>
+        /// Modifies the lobby information.
+        /// </summary>
+        /// <remarks>
+        /// This method is executed on a separate thread and is responsible for making changes to the lobby's data or settings. The exact implementation will depend on the specific requirements of the lobby modification.
+        /// </remarks>
         private void Modify()
         {
             try
@@ -103,9 +141,7 @@ namespace Tavstal.TLobbyEditor
                     if (Config.HidePlugins)
                         SteamGameServer.SetKeyValue("rocketplugins", "0");
                     else if (Config.MessPlugins)
-                    {
-                        SteamGameServer.SetKeyValue("rocketplugins", Config.Plugins.GetString(","));
-                    }
+                        SteamGameServer.SetKeyValue("rocketplugins", string.Join(",", Config.Plugins));
                     else
                         SteamGameServer.SetKeyValue("rocketplugins", string.Join(",", R.Plugins.GetPlugins().Select(p => p.Name).ToArray()));
                     #endregion
@@ -165,26 +201,9 @@ namespace Tavstal.TLobbyEditor
                     #endregion
 
                     string tags = "";
-                    tags += String.Concat(new string[]
-                    {
-                    Config.IsPVP ? "PVP" : "PVE",
-                    ",<gm>",
-                    Config.MessGamemode ? Config.Gamemode : Provider.gameMode.GetType().Name,
-                    "</gm>,",
-                    Config.HasCheats ? "CHy" : "CHn",
-                    ",",
-                    difficulty,
-                    ",",
-                    cameraMode,
-                    ",",
-                    !Config.HideWorkshop ? "WSy" : "WSn",
-                    ",",
-                    Config.GoldOnly ? "GLD" : "F2P",
-                    ",",
-                    Config.HasBattleye ? "BEy" : "BEn"
-                    });
+                    tags += string.Concat(Config.IsPVP ? "PVP" : "PVE", ",<gm>", Config.MessGamemode ? Config.Gamemode : Provider.gameMode.GetType().Name, "</gm>,", Config.HasCheats ? "CHy" : "CHn", ",", difficulty, ",", cameraMode, ",", !Config.HideWorkshop ? "WSy" : "WSn", ",", Config.GoldOnly ? "GLD" : "F2P", ",", Config.HasBattleye ? "BEy" : "BEn");
 
-                    if (!String.IsNullOrEmpty(Provider.configData.Browser.Thumbnail))
+                    if (!string.IsNullOrEmpty(Provider.configData.Browser.Thumbnail))
                         tags += ",<tn>" + Provider.configData.Browser.Thumbnail + "</tn>";
 
                     SteamGameServer.SetGameTags(tags);
@@ -196,19 +215,15 @@ namespace Tavstal.TLobbyEditor
                     if (Config.DescriptionFull.Length == 0)
                     {
                         SteamGameServer.SetKeyValue("Browser_Desc_Full_Count", "0");
-                        SteamGameServer.SetKeyValue("Browser_Desc_Full_Line_0", String.Empty);
+                        SteamGameServer.SetKeyValue("Browser_Desc_Full_Line_0", string.Empty);
                     }
                     else
                     {
                         SteamGameServer.SetKeyValue("Browser_Desc_Full_Count", Config.DescriptionFull.Length.ToString());
 
                         for (int i = 0; i < Config.DescriptionFull.Length; i++)
-                        {
                             SteamGameServer.SetKeyValue("Browser_Desc_Full_Line_" + i, Config.DescriptionFull[i] + System.Environment.NewLine);
-                        }
                     }
-
-                    
                     #endregion
                 });
                 
@@ -219,10 +234,18 @@ namespace Tavstal.TLobbyEditor
             }
         }
 
-        private void Event_OnPlayerConnectPending(CSteamID steamid, ref ESteamRejection? rejectionReason)
+        /// <summary>
+        /// Called when a player is attempting to connect to the server, but their connection is still pending.
+        /// </summary>
+        /// <param name="steamId">The Steam ID of the player attempting to connect.</param>
+        /// <param name="rejectionReason">The reason for rejecting the player's connection, if applicable. This is passed by reference and can be modified.</param>
+        /// <remarks>
+        /// This method allows you to handle player connection attempts before they are fully processed. You can modify the <paramref name="rejectionReason"/> to reject the connection if needed.
+        /// </remarks>
+        private void OnPlayerConnectPending(CSteamID steamId, ref ESteamRejection? rejectionReason)
         {
-            SteamPending pending = Provider.pending.Find(x => x.playerID.steamID == steamid);
-            UnturnedPlayer player = UnturnedPlayer.FromCSteamID(steamid);
+            //SteamPending pending = Provider.pending.Find(x => x.playerID.steamID == steamId);
+            UnturnedPlayer player = UnturnedPlayer.FromCSteamID(steamId);
 
             if (Config.ReservedSlots.Enable)
             {

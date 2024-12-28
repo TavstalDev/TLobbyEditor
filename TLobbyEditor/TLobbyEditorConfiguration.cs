@@ -4,6 +4,7 @@ using Tavstal.TLobbyEditor.Models;
 
 namespace Tavstal.TLobbyEditor
 {
+    // ReSharper disable once InconsistentNaming
     public class TLobbyEditorConfiguration : ConfigurationBase
     {
         [JsonProperty(Order = 3)]
@@ -33,6 +34,7 @@ namespace Tavstal.TLobbyEditor
         [JsonProperty(Order = 15)]
         public string Gamemode { get; set; }
         [JsonProperty(Order = 16)]
+        // ReSharper disable once InconsistentNaming
         public bool IsPVP { get; set; }
         [JsonProperty(Order = 17)]
         public bool HasCheats { get; set; }
