@@ -103,7 +103,7 @@ namespace Tavstal.TLobbyEditor
                         SteamGameServer.SetBotPlayerCount(0);
                     if (Config.ReservedSlots.Enable)
                         SteamGameServer.SetMaxPlayerCount(Config.ReservedSlots.DefaultSlots + Config.ReservedSlots.MaxReservedSlots);
-                    SteamGameServer.SetAdvertiseServerActive(Config.ShouldAdversiteServer);
+                    SteamGameServer.SetAdvertiseServerActive(Config.ShouldAdvertiseServer);
 
                     #region Config
                     if (Config.HideConfig)
@@ -201,7 +201,7 @@ namespace Tavstal.TLobbyEditor
                     #endregion
 
                     string tags = "";
-                    tags += string.Concat(Config.IsPVP ? "PVP" : "PVE", ",<gm>", Config.MessGamemode ? Config.Gamemode : Provider.gameMode.GetType().Name, "</gm>,", Config.HasCheats ? "CHy" : "CHn", ",", difficulty, ",", cameraMode, ",", !Config.HideWorkshop ? "WSy" : "WSn", ",", Config.GoldOnly ? "GLD" : "F2P", ",", Config.HasBattleye ? "BEy" : "BEn");
+                    tags += string.Concat(Config.IsPVP ? "PVP" : "PVE", ",<gm>", Config.MessGamemode ? Config.Gamemode : Provider.gameMode.GetType().Name, "</gm>,", Config.HasCheats ? "CHy" : "CHn", ",", difficulty, ",", cameraMode, ",", !Config.HideWorkshop ? "WSy" : "WSn", ",", Config.GoldOnly ? "GLD" : "F2P", ",", Config.HasBattleEye ? "BEy" : "BEn");
 
                     if (!string.IsNullOrEmpty(Provider.configData.Browser.Thumbnail))
                         tags += ",<tn>" + Provider.configData.Browser.Thumbnail + "</tn>";

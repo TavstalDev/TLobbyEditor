@@ -8,7 +8,7 @@ namespace Tavstal.TLobbyEditor
     public class TLobbyEditorConfiguration : ConfigurationBase
     {
         [JsonProperty(Order = 3)]
-        public bool ShouldAdversiteServer { get; set; }
+        public bool ShouldAdvertiseServer { get; set; }
         [JsonProperty(Order = 4)]
         public bool HideRocket { get; set; }
         [JsonProperty(Order = 5)]
@@ -45,7 +45,7 @@ namespace Tavstal.TLobbyEditor
         [JsonProperty(Order = 20)]
         public bool GoldOnly { get; set; }
         [JsonProperty(Order = 21)]
-        public bool HasBattleye { get; set; }
+        public bool HasBattleEye { get; set; }
         [JsonProperty(Order = 22)]
         public string Description { get; set; }
         [JsonProperty(Order = 23)]
@@ -60,7 +60,7 @@ namespace Tavstal.TLobbyEditor
             DebugMode = false;
             Locale = "en";
             DownloadLocalePacks = true;
-            ShouldAdversiteServer = true;
+            ShouldAdvertiseServer = true;
             HideRocket = true;
             HideWorkshop = false;
             MessWorkshop = true;
@@ -78,7 +78,7 @@ namespace Tavstal.TLobbyEditor
             Difficulty = "EASY";
             CameraMode = "VEHICLE";
             GoldOnly = false;
-            HasBattleye = true;
+            HasBattleEye = true;
             Description = "<color=yellow>Fight just like soldiers</color>";
             DescriptionHint = "<color=yellow>Hosted by: unknown.com</color>";
             DescriptionFull = new[] { "<color=#00FFFF>Welcome to Unturfield! Our server is heavily modified by plugins and mods with custom gamemode.</color> \n",
