@@ -38,22 +38,27 @@ namespace Tavstal.TLobbyEditor
             if (Level.isLoaded)
                 StartModifyingLobbyInfo();
 
-            Logger.LogWarning("████████╗██╗      ██████╗ ██████╗ ██████╗ ██╗   ██╗");
-            Logger.LogWarning("╚══██╔══╝██║     ██╔═══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝");
-            Logger.LogWarning("   ██║   ██║     ██║   ██║██████╔╝██████╔╝ ╚████╔╝ ");
-            Logger.LogWarning("   ██║   ██║     ██║   ██║██╔══██╗██╔══██╗  ╚██╔╝  ");
-            Logger.LogWarning("   ██║   ███████╗╚██████╔╝██████╔╝██████╔╝   ██║   ");
-            Logger.LogWarning("   ╚═╝   ╚══════╝ ╚═════╝ ╚═════╝ ╚═════╝    ╚═╝   ");
-            Logger.Log("#########################################");
-            Logger.Log("# Thanks for using my plugin");
-            Logger.Log("# Plugin Created By Tavstal");
-            Logger.Log("# Discord: Tavstal#6189");
-            Logger.Log("# Website: https://redstoneplugins.com");
-            Logger.Log("# Discord: https://discord.gg/redstoneplugins");
-            Logger.Log("#########################################");
-            Logger.Log($"# Build Version: {Version}");
-            Logger.Log($"# Build Date: {BuildDate}");
-            Logger.Log("#########################################");
+            Logger.Log("████████╗██╗      ██████╗ ██████╗ ██████╗ ██╗   ██╗", ConsoleColor.Cyan, prefix: null);
+            Logger.Log("╚══██╔══╝██║     ██╔═══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝", ConsoleColor.Cyan, prefix: null);
+            Logger.Log("   ██║   ██║     ██║   ██║██████╔╝██████╔╝ ╚████╔╝ ", ConsoleColor.Cyan, prefix: null);
+            Logger.Log("   ██║   ██║     ██║   ██║██╔══██╗██╔══██╗  ╚██╔╝  ", ConsoleColor.Cyan, prefix: null);
+            Logger.Log("   ██║   ███████╗╚██████╔╝██████╔╝██████╔╝   ██║   ", ConsoleColor.Cyan, prefix: null);
+            Logger.Log("   ╚═╝   ╚══════╝ ╚═════╝ ╚═════╝ ╚═════╝    ╚═╝   ", ConsoleColor.Cyan, prefix: null);
+            Logger.Log("#########################################", prefix: null);
+            Logger.Log("#       Thanks for using this plugin!   #", prefix: null);
+            Logger.Log("#########################################", prefix: null);
+            Logger.Log("# Developed By: Tavstal", prefix: null);
+            Logger.Log("# Discord:      @Tavstal", prefix: null);
+            Logger.Log("# Website:      https://redstoneplugins.com", prefix: null);
+            Logger.Log("# My GitHub:    https://tavstaldev.github.io", prefix: null);
+            Logger.Log("#########################################", prefix: null);
+            Logger.Log($"# Plugin Version:    {Version}", prefix: null);
+            Logger.Log($"# Build Date:        {BuildDate}", prefix: null);
+            Logger.Log($"# TLibrary Version:  {LibraryVersion}", prefix: null);
+            Logger.Log("#########################################", prefix: null);
+            Logger.Log("# Found an issue or have a suggestion?", prefix: null);
+            Logger.Log("# Report it here: https://github.com/TavstalDev/TLobbyEditor/issues", prefix: null); 
+            Logger.Log("#########################################", prefix: null);
         }
 
         /// <summary>
@@ -230,7 +235,7 @@ namespace Tavstal.TLobbyEditor
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error in Modify: " + ex);
+                Logger.Error("Error in Modify: " + ex);
             }
         }
 
