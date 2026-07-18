@@ -1,64 +1,65 @@
-﻿using Newtonsoft.Json;
-using Tavstal.TLibrary.Models.Plugin;
+﻿using System;
+using Tavstal.TLibrary.Models.Config;
+using Tavstal.TLibrary.Models.Logging;
 using Tavstal.TLobbyEditor.Models;
+using YamlDotNet.Serialization;
+// ReSharper disable ClassNeverInstantiated.Global
 
 namespace Tavstal.TLobbyEditor
 {
-    // ReSharper disable once InconsistentNaming
-    public class TLobbyEditorConfiguration : ConfigurationBase
+    public class TLobbyEditorConfiguration : YamlConfiguration
     {
-        [JsonProperty(Order = 3)]
+        [YamlMember(Order = 3, Description = "Whether the server shows up in the server browser")]
         public bool ShouldAdvertiseServer { get; set; }
-        [JsonProperty(Order = 4)]
+        [YamlMember(Order = 4, Description = "Hides the Rocket mod loader tag from the server browser")]
         public bool HideRocket { get; set; }
-        [JsonProperty(Order = 5)]
+        [YamlMember(Order = 5, Description = "Hides workshop tag from the server browser")]
         public bool HideWorkshop { get; set; }
-        [JsonProperty(Order = 6)]
+        [YamlMember(Order = 6, Description = "Replaces the workshop tag with a custom value")]
         public bool MessWorkshop { get; set; }
-        [JsonProperty(Order = 7)]
-        public string[] Workshop { get; set; }
-        [JsonProperty(Order = 8)]
+        [YamlMember(Order = 7, Description = "Custom workshop tag value shown in the server browser")] 
+        public string[] Workshop { get; set; } = Array.Empty<string>();
+        [YamlMember(Order = 8, Description = "Hides config entries from the server browser")]
         public bool HideConfig { get; set; }
-        [JsonProperty(Order = 9)]
+        [YamlMember(Order = 9, Description = "Replaces config entries with custom values")]
         public bool MessConfig { get; set; }
-        [JsonProperty(Order = 10)]
-        public string[] Config { get; set; }
-        [JsonProperty(Order = 11)]
+        [YamlMember(Order = 10, Description = "Custom config key-value pairs (format: Key=Value)")]
+        public string[] Config { get; set; }  = Array.Empty<string>();
+        [YamlMember(Order = 11, Description = "Hides plugin names from the server browser")]
         public bool HidePlugins { get; set; }
-        [JsonProperty(Order = 12)]
+        [YamlMember(Order = 12, Description = "Replaces plugin names with custom values")]
         public bool MessPlugins { get; set; }
-        [JsonProperty(Order = 13)]
-        public string[] Plugins { get; set; }
-        [JsonProperty(Order = 14)]
+        [YamlMember(Order = 13, Description = "Custom plugin names shown in the server browser")]
+        public string[] Plugins { get; set; }  = Array.Empty<string>();
+        [YamlMember(Order = 14, Description = "Replaces the gamemode name with a custom value")]
         public bool MessGamemode { get; set; }
-        [JsonProperty(Order = 15)]
-        public string Gamemode { get; set; }
-        [JsonProperty(Order = 16)]
-        // ReSharper disable once InconsistentNaming
+        [YamlMember(Order = 15, Description = "Custom gamemode name shown in the server browser")]
+        public string Gamemode { get; set; } = string.Empty;
+        [YamlMember(Order = 16, Description = "Marks the server as PVP (false for PVE)")]
         public bool IsPVP { get; set; }
-        [JsonProperty(Order = 17)]
+        [YamlMember(Order = 17, Description = "Indicates whether cheats are enabled on the server")]
         public bool HasCheats { get; set; }
-        [JsonProperty(Order = 18)]
-        public string Difficulty { get; set; } // EASY, NORMAL, HARD
-        [JsonProperty(Order = 19)]
-        public string CameraMode { get; set; } // FP, TP, BOTH, VEHICLE 
-        [JsonProperty(Order = 20)]
+        [YamlMember(Order = 18, Description = "Server difficulty shown in the server browser")] 
+        public string Difficulty { get; set; } = string.Empty;
+        [YamlMember(Order = 19, Description = "Camera mode displayed in the server browser")] 
+        public string CameraMode { get; set; } = string.Empty;
+        [YamlMember(Order = 20, Description = "Marks the server as Gold-only (false for free-to-play)")]
         public bool GoldOnly { get; set; }
-        [JsonProperty(Order = 21)]
+        [YamlMember(Order = 21, Description = "Indicates whether BattlEye anti-cheat is active")]
         public bool HasBattleEye { get; set; }
-        [JsonProperty(Order = 22)]
-        public string Description { get; set; }
-        [JsonProperty(Order = 23)]
-        public string DescriptionHint { get; set; }
-        [JsonProperty(Order = 24)]
-        public string[] DescriptionFull { get; set; }
-        [JsonProperty(Order = 25)]
-        public ReservedSlots ReservedSlots { get; set; }
+        [YamlMember(Order = 22, Description = "Short server description shown in the browser tooltip")]
+        public string Description { get; set; } = string.Empty; 
+        [YamlMember(Order = 23, Description = "Hint line shown below the server name in the browser")]
+        public string DescriptionHint { get; set; } = string.Empty; 
+        [YamlMember(Order = 24, Description = "Full multi-line server description shown in browser details")]
+        public string[] DescriptionFull { get; set; }  = Array.Empty<string>();
+        [YamlMember(Order = 25, Description = "Configuration for reserving player slots")]
+        public ReservedSlots ReservedSlots { get; set; } = new  ReservedSlots();
 
         public override void LoadDefaults()
         {
-            DebugMode = false;
             Locale = "en";
+            LogLevel = ELogLevel.INFO;
             DownloadLocalePacks = true;
             ShouldAdvertiseServer = true;
             HideRocket = true;
