@@ -1,5 +1,4 @@
 ﻿using SDG.Unturned;
-using System;
 using System.Linq;
 
 namespace Tavstal.TLobbyEditor.Helpers
@@ -7,9 +6,6 @@ namespace Tavstal.TLobbyEditor.Helpers
     /// <summary>
     /// A static class containing helper methods for working with lobby-related data.
     /// </summary>
-    /// <remarks>
-    /// This class provides utility methods to retrieve counts related to server workshop files and mode configuration fields.
-    /// </remarks>
     public static class LobbyHelpers 
     {
         /// <summary>
