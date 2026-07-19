@@ -42,11 +42,11 @@ namespace Tavstal.TLobbyEditor.Models
         /// </summary>
         public ReservedSlots()
         {
-            Enable = false;
-            RequirePermission = false;
-            Permission = string.Empty;
-            DefaultSlots = 1;
-            MaxReservedSlots = 1;
+            Enable = true;
+            RequirePermission = true;
+            Permission = "reservedslots.active";
+            DefaultSlots = 40;
+            MaxReservedSlots = 8;
         }
 
         /// <summary>
