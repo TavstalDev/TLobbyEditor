@@ -27,9 +27,10 @@ A [RocketMod](https://rocketmod.net/) plugin for **Unturned 3.24.x+** servers th
 ## Installation
 
 1. Download the latest release and its libraries from the [Releases](https://github.com/TavstalDev/TLobbyEditor/releases) page.
-2. Place `TLobbyEditor.dll` into your server's `Rocket/plugins/` directory.
-3. Start or restart the server. The plugin will generate a default YAML configuration file on first load.
-4. Edit the configuration file to your liking, then reload the plugin or restart the server.
+2. Place `TLobbyEditor.dll` into your server's `Rocket/Plugins/` directory.
+3. Extract the libraries archive into `Rocket/Libraries` directory.
+4. Start or restart the server. The plugin will generate a default YAML configuration file on first load.
+5. Edit the configuration file to your liking, then reload the plugin or restart the server.
 
 ## Commands
 
@@ -50,16 +51,15 @@ A [RocketMod](https://rocketmod.net/) plugin for **Unturned 3.24.x+** servers th
    git clone https://github.com/TavstalDev/TLobbyEditor.git
    ```
 2. Open `TLobbyEditor.sln` in your IDE.
-3. Restore NuGet packages and build:
+3. Build the project:
    ```
-   nuget restore TLobbyEditor.sln
-   msbuild TLobbyEditor.sln /p:Configuration=Release
+   dotnet build -c Release
    ```
 4. The output DLL will be at `TLobbyEditor/bin/Release/net48/TLobbyEditor.dll`.
 
 ## License
 
-This project is licensed under the [GNU General Public License v3.0](LICENSE.txt).
+This project is licensed under the [GNU General Public License v3.0](LICENSE).
 
 ## Contributing
 
