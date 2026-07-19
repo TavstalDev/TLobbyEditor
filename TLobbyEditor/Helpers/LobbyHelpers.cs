@@ -6,7 +6,7 @@ namespace Tavstal.TLobbyEditor.Helpers
     /// <summary>
     /// A static class containing helper methods for working with lobby-related data.
     /// </summary>
-    public static class LobbyHelpers 
+    public static class LobbyHelpers
     {
         /// <summary>
         /// Gets the count of workshop items for the server.
