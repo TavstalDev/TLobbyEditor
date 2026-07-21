@@ -36,10 +36,16 @@ namespace Tavstal.TLobbyEditor.Commands
         /// <param name="command">The command arguments (unused).</param>
         public void Execute(IRocketPlayer caller, string[] command)
         {
-            TLobbyEditor.Instance.SendPlainCommandReply(caller, "#########################################");
-            TLobbyEditor.Instance.SendPlainCommandReply(caller, $"# Build Version: {TLobbyEditor.Version}");
-            TLobbyEditor.Instance.SendPlainCommandReply(caller, $"# Build Date: {TLobbyEditor.BuildDate}");
-            TLobbyEditor.Instance.SendPlainCommandReply(caller, "#########################################");
+            var instance = TLobbyEditor.Instance;
+            var config = instance.Config.General;
+            var icon = config.MessageIcon;
+            string message = string.Join(System.Environment.NewLine, 
+                $"&b&l[{instance.GetPluginName()}]&r System Info:",
+                $"&b • Version: &r{TLobbyEditor.Version}",
+                $"&b • Build Date: &r{TLobbyEditor.BuildDate}",
+                 "&b • Developer: &rTavstal");
+            
+            instance.SendPlainCommandReply(caller, message, icon);
         }
     }
 }
