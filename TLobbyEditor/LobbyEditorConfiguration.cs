@@ -25,10 +25,10 @@ namespace Tavstal.TLobbyEditor
         
         public override void LoadDefaults()
         {
-            Locale = "en";
-            LogLevel = ELogLevel.INFO;
-            DownloadLocalePacks = true;
-
+            General = new GeneralConfig
+            {
+                MessageIcon = "https://raw.githubusercontent.com/TavstalDev/TLobbyEditor/refs/heads/master/assets/icon.png"
+            };
             Informational = new InformationalConfig();
             Identity = new IdentityConfig();
             Masking = new MaskingConfig();

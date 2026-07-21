@@ -1,3 +1,4 @@
+using SDG.Unturned;
 using YamlDotNet.Serialization;
 // ReSharper disable ClassNeverInstantiated.Global
 
@@ -48,7 +49,7 @@ namespace Tavstal.TLobbyEditor.Models
         /// Gets or sets the camera mode displayed in the server browser.
         /// </summary>
         [YamlMember(Order = 6, Description = "Camera mode displayed in the server browser")] 
-        public string CameraMode { get; set; } = string.Empty;
+        public ECameraMode CameraMode { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IdentityConfig"/> class with default values.
@@ -58,22 +59,23 @@ namespace Tavstal.TLobbyEditor.Models
             ShouldAdvertiseServer = true;
             IsPvp = true;
             HasCheats = false;
-            HasBattleEye = true;
+            HasBattleEye = false;
             GoldOnly = false;
             Difficulty = "EASY";
-            CameraMode = "VEHICLE";
+            CameraMode = ECameraMode.VEHICLE;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IdentityConfig"/> class with specified values.
         /// </summary>
-        public IdentityConfig(bool shouldAdvertiseServer, bool isPvp, bool hasCheats, bool hasBattleEye, bool goldOnly)
+        public IdentityConfig(bool shouldAdvertiseServer, bool isPvp, bool hasCheats, bool hasBattleEye, bool goldOnly, ECameraMode cameraMode)
         {
             ShouldAdvertiseServer = shouldAdvertiseServer;
             IsPvp = isPvp;
             HasCheats = hasCheats;
             HasBattleEye = hasBattleEye;
             GoldOnly = goldOnly;
+            CameraMode = cameraMode;
         }
     }
 }

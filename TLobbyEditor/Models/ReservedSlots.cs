@@ -29,13 +29,13 @@ namespace Tavstal.TLobbyEditor.Models
         /// Gets or sets the number of publicly available player slots.
         /// </summary>
         [YamlMember(Order = 3, Description = "Number of public player slots available")]
-        public int DefaultSlots { get; set; }
+        public byte DefaultSlots { get; set; }
 
         /// <summary>
         /// Gets or sets the number of extra slots reserved for players with the required permission.
         /// </summary>
         [YamlMember(Order = 4, Description = "Number of extra slots reserved for permitted players")]
-        public int MaxReservedSlots { get; set; }
+        public byte MaxReservedSlots { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReservedSlots"/> class with default values.
@@ -45,8 +45,8 @@ namespace Tavstal.TLobbyEditor.Models
             Enable = true;
             RequirePermission = true;
             Permission = "reservedslots.active";
-            DefaultSlots = 40;
-            MaxReservedSlots = 8;
+            DefaultSlots = 20;
+            MaxReservedSlots = 4;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Tavstal.TLobbyEditor.Models
         /// <param name="permission">The permission string required to access reserved slots.</param>
         /// <param name="defaultSlots">The number of publicly available player slots.</param>
         /// <param name="maxReservedSlots">The number of extra slots reserved for permitted players.</param>
-        public ReservedSlots(bool enable, bool requirePermission, string permission, int defaultSlots, int maxReservedSlots)
+        public ReservedSlots(bool enable, bool requirePermission, string permission, byte defaultSlots, byte maxReservedSlots)
         {
             Enable = enable;
             RequirePermission = requirePermission;

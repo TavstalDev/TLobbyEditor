@@ -51,8 +51,16 @@ namespace Tavstal.TLobbyEditor.Helpers
                 if (Config.Masking.HideRocket)
                     SteamGameServer.SetBotPlayerCount(0);
                 if (Config.ReservedSlots.Enable)
-                    SteamGameServer.SetMaxPlayerCount(Config.ReservedSlots.DefaultSlots +
-                                                      Config.ReservedSlots.MaxReservedSlots);
+                {
+                    int newSlots = Config.ReservedSlots.DefaultSlots + Config.ReservedSlots.MaxReservedSlots;
+                    if (newSlots > byte.MaxValue)
+                        newSlots = byte.MaxValue;
+                    byte slots = (byte)newSlots;
+                    
+                    SteamGameServer.SetMaxPlayerCount(slots);
+                    Provider.maxPlayers = slots;
+                }
+
                 SteamGameServer.SetAdvertiseServerActive(Config.Identity.ShouldAdvertiseServer);
             }
             catch (Exception ex)
@@ -186,43 +194,13 @@ namespace Tavstal.TLobbyEditor.Helpers
 
                 #endregion
 
-                #region CameraMode
-
-                string cameraMode;
-                switch (Config.Identity.CameraMode.ToUpperInvariant())
-                {
-                    case "FIRST":
-                    case "1PP":
-                        cameraMode = "1Pp";
-                        break;
-                    case "BOTH":
-                    case "2PP":
-                        cameraMode = "2Pp";
-                        break;
-                    case "THIRD":
-                    case "3PP":
-                        cameraMode = "3Pp";
-                        break;
-                    case "VEHICLE":
-                    case "4PP":
-                        cameraMode = "4Pp";
-                        break;
-                    default:
-                        cameraMode = "2Pp";
-                        break;
-                }
-
-                #endregion
-
                 List<string> tags = new List<string>
                 {
                     Config.Identity.IsPvp ? "PVP" : "PVE",
-                    Config.CustomData.MessGamemode
-                        ? $"<gm>{Config.CustomData.Gamemode}</gm>"
-                        : $"<gm>{Provider.gameMode.GetType().Name}</gm>",
+                    $"<gm>{Provider.gameMode}</gm>",
                     Config.Identity.HasCheats ? "CHy" : "CHn",
                     difficulty,
-                    cameraMode,
+                    Config.Identity.CameraMode.ToString(),
                     !Config.Masking.HideWorkshop ? "WSy" : "WSn",
                     Config.Identity.GoldOnly ? "GLD" : "F2P",
                     Config.Identity.HasBattleEye ? "BEy" : "BEn"
@@ -238,6 +216,10 @@ namespace Tavstal.TLobbyEditor.Helpers
                     tags.Add($"<tn>{Provider.configData.Browser.Thumbnail}</tn>");
 
                 SteamGameServer.SetGameTags(string.Join(",", tags));
+                Provider.isPvP = Config.Identity.IsPvp;
+                Provider.hasCheats = Config.Identity.HasCheats;
+                Provider.isGold = Config.Identity.GoldOnly;
+                Provider.cameraMode = Config.Identity.CameraMode;
             }
             catch (Exception ex)
             {

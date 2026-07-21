@@ -44,18 +44,6 @@ namespace Tavstal.TLobbyEditor.Models
         /// </summary>
         [YamlMember(Order = 5, Description = "Custom plugin names shown in the server browser")]
         public string[] Plugins { get; set; }
-        
-        /// <summary>
-        /// Gets or sets whether to replace the gamemode name with a custom value.
-        /// </summary>
-        [YamlMember(Order = 5, Description = "Replaces the gamemode name with a custom value")]
-        public bool MessGamemode { get; set; }
-        
-        /// <summary>
-        /// Gets or sets the custom gamemode name shown in the server browser.
-        /// </summary>
-        [YamlMember(Order = 6, Description = "Custom gamemode name shown in the server browser")]
-        public string Gamemode { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomDataConfig"/> class with default values.
@@ -68,14 +56,12 @@ namespace Tavstal.TLobbyEditor.Models
             Config = new[] { "Server.maintenance=false", "Server.version=1.0.0", "Server.alphaonly=false", "Server.betaonly=false" };
             MessPlugins = true;
             Plugins = new[] { "Server configured by", "TLobbyEditor" };
-            MessGamemode = true;
-            Gamemode = "Conquest";
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomDataConfig"/> class with specified values.
         /// </summary>
-        public CustomDataConfig(bool messWorkshop, string[] workshop, bool messConfig, string[] config, bool messPlugins, string[] plugins, bool messGamemode, string gamemode)
+        public CustomDataConfig(bool messWorkshop, string[] workshop, bool messConfig, string[] config, bool messPlugins, string[] plugins)
         {
             MessWorkshop = messWorkshop;
             Workshop = workshop;
@@ -83,8 +69,6 @@ namespace Tavstal.TLobbyEditor.Models
             Config = config;
             MessPlugins = messPlugins;
             Plugins = plugins;
-            MessGamemode = messGamemode;
-            Gamemode = gamemode;
         }
     }
 }
